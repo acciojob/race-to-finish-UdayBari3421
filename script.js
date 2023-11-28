@@ -1,4 +1,17 @@
-window.promises = [];
+  window.promises = [
+    new Promise(resolve => setTimeout(() => resolve('Promise 1 resolved'), getRandomTime())),
+    new Promise(resolve => setTimeout(() => resolve('Promise 2 resolved'), getRandomTime())),
+    new Promise(resolve => setTimeout(() => resolve('Promise 3 resolved'), getRandomTime())),
+    new Promise(resolve => setTimeout(() => resolve('Promise 4 resolved'), getRandomTime())),
+    new Promise(resolve => setTimeout(() => resolve('Promise 5 resolved'), getRandomTime())),
+  ];
 
-// Do not change the code above this
-// add your promises to the array `promises`
+  Promise.any(window.promises)
+    .then(result => {
+      document.getElementById('output').innerText = result;
+    })
+    .catch(error => console.log(error));
+
+  function getRandomTime() {
+    return Math.floor(Math.random() * (5000 - 1000 + 1) + 1000);
+  }
